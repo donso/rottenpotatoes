@@ -2,6 +2,9 @@ class MoviesController < ApplicationController
 
   def initialize
 	@all_rat = Movie.ratings
+	@all_rat.each do |rat|
+		(@ratings ||= { })[rat] = 1
+	end
 	super
   end
   
@@ -18,10 +21,10 @@ class MoviesController < ApplicationController
 
 	if params[:ratings]
 		@ratings = params[:ratings]
-	else
-		@all_rat.each do |rat|
-			(@ratings ||= { })[rat] = 1
-		end
+	# else
+		# @all_rat.each do |rat|
+			# (@ratings ||= { })[rat] = 1
+		# end
 	end
 
 	Movie.find(:all, :order => @sorting ? @sorting : :id).each do |mv|

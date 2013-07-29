@@ -1,0 +1,10 @@
+git
+	git init
+	git add .
+	git commit -m "algo"
+heroku
+	heroku create
+	git push heroku master
+	
+	heroku ps:scale web=1
+	heroku open
