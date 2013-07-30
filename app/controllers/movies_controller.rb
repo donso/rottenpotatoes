@@ -1,6 +1,5 @@
 class MoviesController < ApplicationController
     @oldratings
-    @ratings
 
   def initialize
 	@all_rat = Movie.ratings
