@@ -16,10 +16,12 @@ class MoviesController < ApplicationController
   end
 
   def index
+    redirect = false
 	if params[:s]
 		@sorting = params[:s]
 	elsif session[:s]
 		@sorting = session[:s]
+		redirect = true
 	# else
 		# @sorting = session[:s]
 	end
@@ -28,10 +30,14 @@ class MoviesController < ApplicationController
 		@ratings = params[:ratings]
 	elsif session[:ratings]
 		@ratings = session[:ratings]
+		redirect = true
 	# else
 		# @ratings = session[:ratings]
 	end
 
+	if redirect
+	  redirect_to movies_path(:s => @sorting, :ratings => @ratings)
+	end
 # debugger
     Movie.find(:all, :order => @sorting ? @sorting : :id).each do |mv|
 	  if @ratings.keys.include? mv[:rating]
