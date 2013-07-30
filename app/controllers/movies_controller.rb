@@ -18,12 +18,16 @@ class MoviesController < ApplicationController
   def index
 	if params[:s]
 		@sorting = params[:s]
+	elsif session[:s]
+		@sorting = session[:s]
 	# else
 		# @sorting = session[:s]
 	end
 
 	if params[:ratings]
 		@ratings = params[:ratings]
+	elsif session[:ratings]
+		@ratings = session[:ratings]
 	# else
 		# @ratings = session[:ratings]
 	end
@@ -35,8 +39,8 @@ class MoviesController < ApplicationController
 	  end
 	end
 	
-    # session[:ratings] = @ratings
-    # session[:s] = @sorting
+    session[:ratings] = @ratings
+    session[:s] = @sorting
 
   end
 
