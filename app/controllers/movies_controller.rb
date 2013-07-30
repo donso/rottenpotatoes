@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-    @oldratings
+    # @oldratings
 
   def initialize
 	@all_rat = Movie.ratings
@@ -18,18 +18,26 @@ class MoviesController < ApplicationController
   def index
 	if params[:s]
 		@sorting = params[:s]
+	else
+		@sorting = session[:s]
 	end
+
 	if params[:ratings]
 		@ratings = params[:ratings]
-		@oldratings = @ratings
+	else
+		@ratings = session[:ratings]
 	end
 
 # debugger
-	Movie.find(:all, :order => @sorting ? @sorting : :id).each do |mv|
-		if @ratings.keys.include? mv[:rating]
-			(@movies ||= [ ]) << mv
-		end
+    Movie.find(:all, :order => @sorting ? @sorting : :id).each do |mv|
+	  if @ratings.keys.include? mv[:rating]
+	    (@movies ||= [ ]) << mv
+	  end
 	end
+	
+    session[:ratings] = @ratings
+    session[:s] = @sorting
+
   end
 
   def new
