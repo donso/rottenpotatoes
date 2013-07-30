@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+    @oldratings
+    @ratings
 
   def initialize
 	@all_rat = Movie.ratings
@@ -15,18 +17,15 @@ class MoviesController < ApplicationController
   end
 
   def index
-	if params[:sort]
-		@sorting = params[:sort]
+	if params[:s]
+		@sorting = params[:s]
 	end
-
 	if params[:ratings]
 		@ratings = params[:ratings]
-	# else
-		# @all_rat.each do |rat|
-			# (@ratings ||= { })[rat] = 1
-		# end
+		@oldratings = @ratings
 	end
 
+# debugger
 	Movie.find(:all, :order => @sorting ? @sorting : :id).each do |mv|
 		if @ratings.keys.include? mv[:rating]
 			(@movies ||= [ ]) << mv
