@@ -19,7 +19,8 @@ class MoviesController < ApplicationController
     redirect = false
 	if params[:s]
 		@sorting = params[:s]
-	elsif session[:s]
+#	elsif session[:s]
+	else
 		@sorting = session[:s]
 		redirect = true
 	# else
@@ -28,7 +29,8 @@ class MoviesController < ApplicationController
 
 	if params[:ratings]
 		@ratings = params[:ratings]
-	elsif session[:ratings]
+	# elsif session[:ratings]
+	else
 		@ratings = session[:ratings]
 		redirect = true
 	# else
