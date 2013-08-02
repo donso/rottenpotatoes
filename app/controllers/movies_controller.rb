@@ -22,8 +22,6 @@ class MoviesController < ApplicationController
 	elsif session[:s]
 		@sorting = session[:s]
 		redirect = true
-	# else
-		# @sorting = session[:s]
 	end
 
 	if params[:ratings]
