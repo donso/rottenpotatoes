@@ -9,3 +9,11 @@ heroku
 	heroku run rake db:seed
 	heroku ps:scale web=1
 	heroku open
+	
+github
+	git pull pruebahub master
+	git push pruebahub master
+	git remote add pruebahub https://github.com/donso/rottenpotatoes
+	
+	
+	git remote set-url pruebahub https://github.com/donso/rottenpotatoes.git
